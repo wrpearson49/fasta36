@@ -17,6 +17,8 @@
 # governing permissions and limitations under the License. 
 ################################################################
 
+## updated 14-April-2024 to work on current InterPro API
+
 # ann_pfam_www0.py takes an annotation file from fasta36 -V with a line of the form:
 
 # sp|P0810|GSTM1_RAT [tab] seqlen
@@ -27,8 +29,8 @@
 # 105	-	189	GST_C~2
 
 # This version has been re-written in python to use the EBI/InterPro API parsing json
-# to get Pfam protein information:  https://www.ebi.ac.uk/interpro/api/entry/pfam/protein/uniprot/P09488
-# to get Pfam domain information: https://www.ebi.ac.uk/interpro/api/entry/pfam/PF02798
+# to get Pfam protein information:  https://www.ebi.ac.uk/interpro/api/entry/interpro/protein/uniprot/P09488
+# to get Pfam domain information: https://www.ebi.ac.uk/interpro/api/entry/interpro/PF02798
 #
 # currently, it does not provide clan information, because the
 # EBI/Interpro/Pfam API does not provide clan information
@@ -50,7 +52,7 @@ import argparse
 import urllib.request
 import urllib.error
 
-interpro_prot_url = "https://www.ebi.ac.uk/interpro/api/entry/pfam/protein/uniprot/"
+interpro_prot_url = "https://www.ebi.ac.uk/interpro/api/entry/interpro/protein/uniprot/"
 interpro_domain_url = "https://www.ebi.ac.uk/interpro/api/entry/pfam/"
 interpro_clan_url = "https://www.ebi.ac.uk/interpro/api/set/pfam/entry/pfam/"
 
@@ -164,10 +166,19 @@ def get_pfam_www(acc):
     prot_len = json_info['results'][0]['proteins'][0]['protein_length']
 
     for result in json_info['results']:
+        if ('pfam' not in result['metadata']['member_databases']):
+            continue
+
+        pfam_info = result['metadata']['member_databases']['pfam']
+        pfam_list = list(pfam_info.keys())
+        pfam_list.sort()
+        pf_acc = pfam_list[0]
+        pf_name = pfam_info[pf_acc]
+
         for protein in result['proteins']:
             for entry in protein['entry_protein_locations']:
                 for frag in entry['fragments']:
-                    pf_dom_list.append({'pf_acc':entry['model'], 'start':frag['start'], 'end':frag['end'], 'score':entry['score']})
+                    pf_dom_list.append({'pf_acc':pf_acc, 'start':frag['start'], 'end':frag['end'], 'name':pf_name})
                 
     pf_dom_list.sort(key = lambda x: x['start'])
 
@@ -232,9 +243,8 @@ def print_doms(seq_id, color_ix, args, dom_colors, dom_names, clan_info):
 
         this_clan_info = clan_info[pf_acc]
 
-
         ## display id or acc?
-        if (this_clan_info):
+        if (this_clan_info and not args.no_clans):
             pf_info = 'C.'+ this_clan_info['name']
         else:
             pf_info = pf_id
