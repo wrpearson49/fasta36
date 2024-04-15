@@ -132,10 +132,12 @@ def get_clan_info_www(pf_acc):
 def get_seq_acc(seq_id):
 
     if (re.search(r'^gi\|',seq_id)):
-        (tmp, gi, sdb, acc, id) = seq_id.split('|')
+        fields = seq_id.split('|')
+        acc = fields[3]
 
     elif (re.search(r'^(sp|tr|up)\|', seq_id)):
-        (sdb, acc, id) = seq_id.split('|')
+        fields = seq_id.split('|')
+        (sdb, acc) = fields[0:2]
     else:
       acc = re.split(r'\s',seq_id)[0]
 
