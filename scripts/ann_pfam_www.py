@@ -29,8 +29,8 @@
 # 105	-	189	GST_C~2
 
 # This version has been re-written in python to use the EBI/InterPro API parsing json
-# to get Pfam protein information:  https://www.ebi.ac.uk/interpro/api/entry/interpro/protein/uniprot/P09488
-# to get Pfam domain information: https://www.ebi.ac.uk/interpro/api/entry/interpro/PF02798
+# to get Pfam protein information:  https://www.ebi.ac.uk/interpro/api/entry/pfam/protein/uniprot/P09488
+# to get Pfam domain information: https://www.ebi.ac.uk/interpro/api/entry/pfam/PF02798
 #
 # currently, it does not provide clan information, because the
 # EBI/Interpro/Pfam API does not provide clan information
@@ -52,7 +52,7 @@ import argparse
 import urllib.request
 import urllib.error
 
-interpro_prot_url = "https://www.ebi.ac.uk/interpro/api/entry/interpro/protein/uniprot/"
+interpro_pfam_prot_url = "https://www.ebi.ac.uk/interpro/api/entry/pfam/protein/uniprot/"
 interpro_domain_url = "https://www.ebi.ac.uk/interpro/api/entry/pfam/"
 interpro_clan_url = "https://www.ebi.ac.uk/interpro/api/set/pfam/entry/pfam/"
 
@@ -70,7 +70,6 @@ def get_pfam_id_www( acc):
 
     else:
         prot_info = req.read().decode('utf-8')
-
 
     json_info= json.loads(prot_info)
 
@@ -148,7 +147,7 @@ def get_seq_acc(seq_id):
 def get_pfam_www(acc):
 
     try:
-        req = urllib.request.urlopen(interpro_prot_url + acc)
+        req = urllib.request.urlopen(interpro_pfam_prot_url + acc)
 
     except urllib.error.URLError as e:
         prot_info = ''
@@ -168,14 +167,10 @@ def get_pfam_www(acc):
     prot_len = json_info['results'][0]['proteins'][0]['protein_length']
 
     for result in json_info['results']:
-        if ('pfam' not in result['metadata']['member_databases']):
-            continue
 
-        pfam_info = result['metadata']['member_databases']['pfam']
-        pfam_list = list(pfam_info.keys())
-        pfam_list.sort()
-        pf_acc = pfam_list[0]
-        pf_name = pfam_info[pf_acc]
+        pfam_info = result['metadata']
+        pf_acc = pfam_info['accession']
+        pf_name = pfam_info['name']
 
         for protein in result['proteins']:
             for entry in protein['entry_protein_locations']:
