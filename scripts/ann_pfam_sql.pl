@@ -82,6 +82,7 @@ GetOptions(
     "min_nodom=i" => \$min_nodom,
     "vdoms|v_doms" => \$vdoms,
     "pfacc" => \$pf_acc,
+    "pfam_acc" => \$pf_acc,
     "RPD2" => \$rpd2_fams,
     "auto_reg" => \$auto_reg,
     "h|?" => \$shelp,

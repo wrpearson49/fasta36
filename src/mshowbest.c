@@ -125,7 +125,7 @@ void showbest (FILE *fp, unsigned char **aa0, unsigned char *aa1save, int maxn,
   int istart = 0, istop, ib;
   int nshow;		/* number of sequences shown before prompt,
 			   and ultimately displayed */
-  int first_line, link_shown;
+  int first_line, link_shown, did_newline;
   int quiet;
   int r_margin;
   struct beststr *bbp;
@@ -502,6 +502,7 @@ l1:
     cur_ares_p = bbp->a_res;
 
     first_line = 1;
+    did_newline = 0;
     do {
       /* if cur_res_p != NULL, then we get rst from a_res->rst
 	 Otherwise, it comes from bbp->rst
@@ -576,8 +577,9 @@ l1:
       }
       else if (m_msp->markx & MX_MBLAST2) {	/* blast "Sequences producing" */ 
 	if (first_line) {first_line = 0;}
-	fprintf (fp,"%-67s %6.1f    %.1g", bline_p, lbits,
+	fprintf (fp,"%-67s %6.1f    %.1g\n", bline_p, lbits,
 		    zs_to_E(lzscore,n1,ppst->dnaseq,ppst->zdb_size,m_msp->db));
+	did_newline = 1;
       }
 
       if (m_msp->markx & MX_M9SUMM || m_msp->markx & MX_M8OUT) {
@@ -686,6 +688,8 @@ l1:
 	      }
 	    }
 	    fprintf(fp,"\n");
+	    did_newline = 1;
+	    
 	  }
 	}
 	else {	/* !SHOW_CODE -> SHOW_ID or SHOW_IDD*/
@@ -724,7 +728,7 @@ l1:
     } while ( cur_ares_p && (cur_ares_p = cur_ares_p->next));
 
     /*    if ((m_msp->markx & MX_HTML) && !link_shown) fprintf(fp," <a href=\"#%s\">align</a>",l_name); */
-    if (!(m_msp->markx & MX_M8OUT)) fprintf(fp, "\n");
+    if (!did_newline) fprintf(fp, "\n");
     fflush(fp);
   }
 
