@@ -59,7 +59,7 @@ re_getlib(unsigned char *, struct annot_str **,
 #include "drop_func.h"
 
 void
-s_annot_to_aa1a(int n1, struct annot_str *annot_p, unsigned char *ann_arr);
+s_annot_to_aa1a(long offset, int n1, struct annot_str *annot_p, unsigned char *ann_arr, char *tmp_line);
 
 /* from build_ares.c */
 struct a_res_str *
@@ -81,7 +81,7 @@ extern float
 calc_fpercent_id(float scale, int n_ident, int n_alen, int tot_ident, float fail);
 
 extern int
-get_annot(char *sname, struct mngmsg *m_msp, char *bline, int n1, struct annot_str **annot_p,
+get_annot(char *sname, struct mngmsg *m_msp, char *bline, long offset, int n1, struct annot_str **annot_p,
  	  int target, int debug);
 extern double find_z(int score, double escore, int length, double comp,void *);
 extern double zs_to_E(double zs, int n1, int dnaseq, long db_size, struct db_str db);
@@ -430,9 +430,12 @@ l1:
 
 	if (m_msp->ann_flg==2 && bbp->seq->annot_p==NULL ) {
 	  /* get information about this sequence from bline */
-	  if (get_annot(m_msp->annot1_sname, m_msp, bline, bbp->seq->n1, &(bbp->seq->annot_p), 1, ppst->debug_lib) > 0) {
+	  if (get_annot(m_msp->annot1_sname, m_msp, bline, 
+			bbp->seq->l_offset + bbp->seq->l_off - 1, bbp->seq->n1, 
+			&(bbp->seq->annot_p), 1, ppst->debug_lib) > 0) {
 	    /* do something with annotation */
-	    s_annot_to_aa1a(bbp->n1, bbp->seq->annot_p, m_msp->ann_arr);
+	    s_annot_to_aa1a(bbp->seq->l_offset + bbp->seq->l_off - 1,
+			    bbp->seq->n1, bbp->seq->annot_p, m_msp->ann_arr, bbp->mseq->libstr);
 	  }
 	}
       }

@@ -6,6 +6,17 @@ multiple high-scoring alignments to be shown, rather than just one.
 This is the main functional difference between FASTA and BLAST -
 BLAST could show multiple HSPs, FASTA did not.
 
+>>Aug 22, 2024
+[src/*.c]
+Edits to cal_consf.c, comp_lib9.c, compacc2e.c, drop_func.h, drop*.c,
+initfa.c, mshowalign2.c, mshowbest.c, nmgetlib.c, scaleswt.c to ensure
+consistent function definitions (argument lists) to reduce errors with
+
+gcc -flto=4 -Werror=odr -Werror=lto-type-mismatch -Werror=strict-aliasing
+
+With gcc 8.5.0, the code produces a single warning in
+initfa.c:get_lambda(), which is a false-positive.
+
 >>May 23, 2024
 [mshowbest.c]
 Fix problem with -m BB (blast output) display "Sequences producing

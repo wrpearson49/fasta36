@@ -522,9 +522,9 @@ char *iprompt1=" test sequence file name: ";
 char *iprompt2=" database file name: ";
 
 #ifdef PCOMPLIB
-char *verstr="36.3.8i May, 2024 MPI";
+char *verstr="36.3.8i Aug, 2024 MPI";
 #else
-char *verstr="36.3.8i May, 2024";
+char *verstr="36.3.8i Aug, 2024";
 #endif
 
 static int mktup=3;
@@ -2063,11 +2063,11 @@ void
 qshuffle() {}
 
 #ifndef LALIGN	 /* LALIGN has last_calc() in last_thresh.c */
-int
+int 
 last_calc(
-	  unsigned char *aa0, unsigned char *aa1, int maxn,
+	  unsigned char **aa0, unsigned char *aa1, int maxn,
 	  struct beststr **bestp_arr, int nbest,
-	  struct mngmsg m_msg, struct pstruct *ppst
+	  const struct mngmsg *m_msg, struct pstruct *ppst
 	  , void **f_str
 	  , void *pstat_str)
 {

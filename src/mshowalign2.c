@@ -93,8 +93,8 @@ buf_align_seq(unsigned char **aa0, int n0,
 
 /* pre-alignment */
 extern void 
-pre_load_best(unsigned char *aa1, int maxn,struct beststr **bbp_arr,
-	      int nbest, struct mngmsg *m_msp, int debug);
+pre_load_best(unsigned char *aa1, int maxn, struct beststr **bbp_arr,
+	      int nbest, const struct mngmsg *m_msp, int debug);
 
 float
 calc_fpercent_id(float scale, int n_ident, int n_alen, int tot_ident, float fail);
@@ -134,7 +134,7 @@ do_url1(FILE *, const struct mngmsg *, const struct pstruct *, char *, int,
 void showalign (FILE *fp, unsigned char **aa0, unsigned char *aa1save, int maxn,
 		struct beststr **bptr, int nbest, int qlib, 
 		struct mngmsg *m_msp, struct pstruct *ppst, 
-		char *info_gstring2
+		char **info_gstring2
 		, void **f_str, struct mng_thr *m_bufi_p
 		)
 {

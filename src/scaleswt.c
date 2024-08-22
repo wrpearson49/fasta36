@@ -166,6 +166,7 @@ process_hist(struct stat_str *sptr, int nstats,
 	     struct pstruct *ppst,
 	     struct hist_str *histp,
 	     struct pstat_str **rs_sp,
+	     struct score_count_s *s_info,
 	     int do_hist
 	     )
 {

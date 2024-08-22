@@ -3602,7 +3602,7 @@ void
 buf_align_seq(unsigned char **aa0, int n0,
 	      struct beststr **bestp_arr, int nbest,
 	      struct pstruct *ppst, struct mngmsg *m_msp,
-	      struct mng_thr *m_bufi_p
+	      const struct mng_thr *m_bufi_p
 #if !defined(COMP_THR) && !defined(PCOMPLIB)
 	      , void **f_str
 #endif
