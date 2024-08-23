@@ -842,7 +842,7 @@ void do_fasts (const unsigned char *aa0, const int n0,
 void do_work (const unsigned char *aa0, const int n0,
 	      const unsigned char *aa1, const int n1,
 	      int frame,
-	      const struct pstruct *ppst, struct f_struct *f_str,
+	      struct pstruct *ppst, struct f_struct *f_str,
 	      int qr_flg, int shuff_flg, struct rstruct *rst,
 	      struct score_count_s *s_info)
 {

@@ -3608,7 +3608,7 @@ void
 buf_align_seq(unsigned char **aa0, int n0,
 	      struct beststr **bestp_arr, int nbest,
 	      struct pstruct *ppst, struct mngmsg *m_msp,
-	      struct mng_thr *m_bufi_p
+	      const struct mng_thr *m_bufi_p
 #if !defined(COMP_THR) && !defined(PCOMPLIB)
 	      , void **f_str
 #endif
@@ -3874,7 +3874,7 @@ dyn_strcat(struct dyn_string_str *dyn_string, char *value) {
     while (dyn_string->inc < add_len) { dyn_string->inc *= 2; }
     dyn_string->mx_size += dyn_string->inc;
     if ((dyn_string->string = (void *)realloc(dyn_string->string, dyn_string->mx_size))==NULL) {
-      fprintf(stderr,"*** ERROR [%s:%d] - cannot re-allocate dyn_string to [%d]\n",
+      fprintf(stderr,"*** ERROR [%s:%d] - cannot re-allocate dyn_string to [%ld]\n",
 	      __FILE__, __LINE__, dyn_string->mx_size);
       dyn_string->mx_size = 0;
       return;
@@ -3894,7 +3894,7 @@ void dyn_strcpy(struct dyn_string_str *dyn_string, char *value) {
     while (dyn_string->inc < add_len) { dyn_string->inc *= 2; }
     dyn_string->mx_size += dyn_string->inc;
     if ((dyn_string->string = (void *)realloc(dyn_string->string, dyn_string->mx_size))==NULL) {
-      fprintf(stderr,"*** ERROR [%s:%d] - cannot re-allocate dyn_string to [%d]\n",
+      fprintf(stderr,"*** ERROR [%s:%d] - cannot re-allocate dyn_string to [%ld]\n",
 	      __FILE__, __LINE__, dyn_string->mx_size);
       dyn_string->mx_size = 0;
       return;

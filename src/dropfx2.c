@@ -983,7 +983,7 @@ void do_fastx (const unsigned char *aa0, int n0,
 void do_work (const unsigned char *aa0, int n0,
 	      const unsigned char *aa1, int n1,
 	      int frame,
-	      const struct pstruct *ppst, struct f_struct *f_str,
+	      struct pstruct *ppst, struct f_struct *f_str,
 	      int qr_flg, int shuff_flg, struct rstruct *rst,
 	      struct score_count_s *s_info)
 {
@@ -2890,7 +2890,7 @@ calc_cons_u( /* inputs */
 	    const unsigned char *aa0, int n0,
 	    const unsigned char *aa1, int n1,
 	    struct a_res_str *a_res,	/* alignment encoding */
-	    struct pstruct *ppst,
+	    const struct pstruct *ppst,
 	    struct f_struct *f_str,
 	    void *pstat_void,
 	    /* annotation stuff */
@@ -3650,7 +3650,7 @@ calc_cons_a(const unsigned char *aa0, int n0,
 	    int *nc,
 	    struct a_struct *aln,
 	    struct a_res_str *a_res, 
-	    struct pstruct *ppst,
+	    const struct pstruct *ppst,
 	    char *seqc0, char *seqc1, char *seqca, int *cumm_seq_score,
 	    const unsigned char *ann_arr,
 	    const unsigned char *aa0a, const struct annot_str *annot0_p, char *seqc0a,

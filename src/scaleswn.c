@@ -715,9 +715,9 @@ ag_parm(char *pam_name, int gdelval, int ggapval, struct pstat_str *pu)
   if (strcmp(pam_name,"BL50")==0) 
     r_v = look_p(bl50_p,gdelval,ggapval,&K,&Lambda,&H);
   else if (strcmp(pam_name,"BL62")==0)
-      r_v = look_p(bl62_p,gdelval,ggapval,&K,&Lambda,&H);
+    r_v = look_p(bl62_p,gdelval,ggapval,&K,&Lambda,&H);
   else if (strcmp(pam_name,"P250")==0)
-      r_v = look_p(p250_p,gdelval,ggapval,&K,&Lambda,&H);
+    r_v = look_p(p250_p,gdelval,ggapval,&K,&Lambda,&H);
   else if (strcmp(pam_name,"P120")==0)
       r_v = look_p(p120_p,gdelval,ggapval,&K,&Lambda,&H);
   else if (strcmp(pam_name,"MD10")==0 || strcmp(pam_name,"VT10")==0)
@@ -733,6 +733,8 @@ ag_parm(char *pam_name, int gdelval, int ggapval, struct pstat_str *pu)
   else if (strcmp(pam_name,"+1/-3")==0)
       r_v = look_p(nt13_p,gdelval,ggapval, &K,&Lambda,&H);
   else {
+    /* dummy call to set K, Lambda, and H */
+    r_v = look_p(bl62_p,gdelval,ggapval,&K,&Lambda,&H);
     r_v = 0;
   }
 

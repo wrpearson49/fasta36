@@ -149,7 +149,7 @@ struct pgm_def_str {
 
 static struct pgm_def_str
 pgm_def_arr[21] = {
-  {0, "", "", "", NULL, 400, "", 0, 0, 0, 0, 1.0, 0, 0 },  /* 0 */
+  {0, "", "", "", NULL, 400, "", 0, 0, 0, 0, 1.0, 0, 0, 0 },  /* 0 */
   {FA_PID, "FASTA", "fa",
    "FASTA searches a protein or DNA sequence data bank",
    NULL, 401, "BL50", 0, 0, 0, 0, 10.0, 2, 0.2, 1}, /* 1 - FASTA */
@@ -181,7 +181,7 @@ pgm_def_arr[21] = {
   {TFA_PID, "TFASTA", "tfa",
    "TFASTA compares a protein  to a translated DNA data bank",
    NULL, 402, "BL50", -2, 0, 0, 0, 5.0, 2, 0.1, 1},
-  {0, "", "", "", NULL, 400, "", 0, 0, 0, 0, 1.0, 0, 0.0 },  /* 0 */
+  {0, "", "", "", NULL, 400, "", 0, 0, 0, 0, 1.0, 0, 0.0, 0 },  /* 0 */
   {TFX_PID, "TFASTX", "tfx",
    "TFASTX compares a protein to a translated DNA data bank",
    NULL, 406, "BL50", -2, 0, -20, 0, 2.0, 2, 0.10, 1},
@@ -217,8 +217,13 @@ struct msg_def_str {
   int stages;
   int qframe;
   int nframe;
-  int nrelv, srelv, arelv;
-  char *f_id0, *f_id1, *label, *alabel;
+  int nrelv;
+  int srelv;
+  int arelv;
+  char *f_id0;
+  char *f_id1;
+  char *label;
+  char *alabel;
 };
 
 /* align_label must be < MAX_SSTR (32) */
@@ -235,46 +240,46 @@ char *align_label[]={
 /* pgm_id    q_seqt     l_seqt   p_seqt sw_f st qf nf nrv srv arv s_ix */
 static struct msg_def_str
 msg_def_arr[21] = {
-  {0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, "", "", ""},	/* ID=0 */
+  {0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, "", "", "",""},	/* ID=0 */
   {FA_PID, SEQT_UNK, SEQT_PROT, SEQT_PROT, 1, 1, 1, -1, 3, 1, 3,
-   "fa","sw", "opt"},
+   "fa","sw", "opt",""},
   {SS_PID, SEQT_UNK, SEQT_PROT, SEQT_PROT, 1, 1, 1, -1, 1, 1, 1,
-   "sw","sw", "s-w"},
+   "sw","sw", "s-w",""},
   {FX_PID, SEQT_DNA, SEQT_PROT, SEQT_PROT, 1, 1, 2, -1, 3, 1, 3,
-   "fx","sx", "opt"},
+   "fx","sx", "opt",""},
   {FY_PID, SEQT_DNA, SEQT_PROT, SEQT_PROT, 1, 1, 2, -1, 3, 1, 3,
-   "fy","sy", "opt"},
+   "fy","sy", "opt",""},
   {FS_PID, SEQT_UNK, SEQT_PROT, SEQT_PROT, 1, 1, 1, -1, 3, 2, 3,
-   "fs","fs", "initn init1"},
+   "fs","fs", "initn init1",""},
   {FF_PID, SEQT_PROT,SEQT_PROT, SEQT_PROT, 1, 1, 1, -1, 3, 2, 3,
-   "ff","ff", "initn init1"},
+   "ff","ff", "initn init1",""},
   {FM_PID, SEQT_UNK,SEQT_PROT, SEQT_PROT, 1, 1, 1, -1, 3, 2, 3,
-   "fm","fm","initn init1"},
+   "fm","fm","initn init1",""},
   {RSS_PID, SEQT_UNK,SEQT_PROT, SEQT_PROT, 0, 1, 1, -1, 1, 1, 1,
-   "rss","sw","s-w"},
+   "rss","sw","s-w",""},
   {RFX_PID, SEQT_DNA,SEQT_PROT, SEQT_PROT, 0, 1, 2, -1, 3, 1, 3,
-   "rfx","sx","opt"},
+   "rfx","sx","opt",""},
   {SSS_PID, SEQT_UNK,SEQT_PROT, SEQT_PROT, 1, 1, 1, -1, 1, 1, 1,
-   "sw","sw", "s-w"},
+   "sw","sw", "s-w",""},
   {TFA_PID, SEQT_PROT,SEQT_DNA, SEQT_PROT, 0, 1, 1, 6, 3, 1, 3,
-   "tfa","fa","initn init1"},
-  {0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, "", "", ""},	/* ID=12 */
+   "tfa","fa","initn init1",""},
+  {0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, "", "", "",""},	/* ID=12 */
   {TFX_PID, SEQT_PROT,SEQT_DNA, SEQT_PROT, 1, 1, 1, 2, 3, 2, 3,
-   "tfx","sx","initn opt"},
+   "tfx","sx","initn opt",""},
   {TFY_PID, SEQT_PROT,SEQT_DNA, SEQT_PROT, 1, 1, 1, 2, 3, 2, 3,
-   "tfy","sy","initn opt"},
+   "tfy","sy","initn opt",""},
   {TFS_PID, SEQT_PROT,SEQT_DNA, SEQT_PROT, 1, 1, 1, 6, 3, 2, 3,
-   "tfs","fs","initn init1"},
+   "tfs","fs","initn init1",""},
   {TFF_PID, SEQT_PROT,SEQT_DNA, SEQT_PROT, 1, 1, 1, 6, 3, 2, 3,
-   "tff","ff","initn init1"},
+   "tff","ff","initn init1",""},
   {TFM_PID, SEQT_PROT,SEQT_DNA, SEQT_PROT, 1, 1, 1, 6, 3, 2, 3,
-   "tfm","fm","initn init1"},
+   "tfm","fm","initn init1",""},
   {LAL_PID, SEQT_UNK, SEQT_PROT, SEQT_PROT, 1, 1, 1, -1, 1, 1, 1,
-   "lsw","lsw", "ls-w"},
+   "lsw","lsw", "ls-w",""},
   {LNW_PID, SEQT_UNK, SEQT_PROT, SEQT_PROT, 1, 1, 1, -1, 1, 1, 1,
-   "gnw","gnw", "n-w"},
+   "gnw","gnw", "n-w",""},
   {GNW_PID, SEQT_UNK, SEQT_PROT, SEQT_PROT, 1, 1, 1, -1, 1, 1, 1,
-   "gnw","gnw", "n-w"},
+   "gnw","gnw", "n-w",""},
 };
 
 int
@@ -522,9 +527,9 @@ char *iprompt1=" test sequence file name: ";
 char *iprompt2=" database file name: ";
 
 #ifdef PCOMPLIB
-char *verstr="36.3.8i May, 2024 MPI";
+char *verstr="36.3.8i Aug, 2024 MPI";
 #else
-char *verstr="36.3.8i May, 2024";
+char *verstr="36.3.8i Aug, 2024";
 #endif
 
 static int mktup=3;
@@ -907,7 +912,7 @@ f_initenv (struct mngmsg *m_msp, struct pstruct *ppst, unsigned char **aa0) {
 
   SAFE_STRNCPY(m_msp->f_id0,m_msg_def.f_id0,sizeof(m_msp->f_id0));
   SAFE_STRNCPY(m_msp->f_id1,m_msg_def.f_id1,sizeof(m_msp->f_id1));
-  SAFE_STRNCPY (m_msp->label, m_msg_def.label, sizeof(m_msp->label));
+  SAFE_STRNCPY(m_msp->label, m_msg_def.label, sizeof(m_msp->label));
   SAFE_STRNCPY(m_msp->alabel, m_msg_def.alabel, sizeof(m_msp->alabel));
 
 #if !defined(SSEARCH) && !defined(GGSEARCH) && !defined(GLSEARCH) && !defined(LALIGN)
@@ -2063,11 +2068,11 @@ void
 qshuffle() {}
 
 #ifndef LALIGN	 /* LALIGN has last_calc() in last_thresh.c */
-int
+int 
 last_calc(
-	  unsigned char *aa0, unsigned char *aa1, int maxn,
+	  unsigned char **aa0, unsigned char *aa1, int maxn,
 	  struct beststr **bestp_arr, int nbest,
-	  struct mngmsg m_msg, struct pstruct *ppst
+	  const struct mngmsg *m_msg, struct pstruct *ppst
 	  , void **f_str
 	  , void *pstat_str)
 {
