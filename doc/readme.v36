@@ -9,6 +9,8 @@ BLAST could show multiple HSPs, FASTA did not.
 >>Aug 28, 2024
 [src/dropfx2.c,dropfz3.c,compacc2e.c]
 Correct bug in variant score calculation for translated alignments.
+[comp_lib9.c, last_thresh.c, mshowbest.c, mshowalign2.c, scaleswn.c, scaleswt.c]
+Address problems with last_thresh() and E1_to_s() having valid zsflag.
 
 >>Aug 22, 2024
 [src/*.c]

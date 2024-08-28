@@ -255,7 +255,7 @@ int last_calc( unsigned char **aa0, unsigned char *aa1, int maxn,
 void scale_scores(struct beststr **bestp_arr, int nbest,
 		  struct db_str,struct pstruct *ppst, void *);
 
-int E1_to_s(double e_val, int n0, int n1, int db_size, void *pu);
+int E1_to_s(double e_val, int n0, int n1, int db_size, int zsflag, void *pu);
 
 extern void pstat_info(char *, int, char *, void *);
 
@@ -1536,7 +1536,7 @@ main (int argc, char *argv[])
 	    }
 	    else {
 	      bestp_arr[i]->repeat_thresh = 
-		min(E1_to_s(pst.e_cut_r, m_msg.n0, bestp_arr[i]->seq->n1, pst.zdb_size, m_msg.pstat_void),
+		min(E1_to_s(pst.e_cut_r, m_msg.n0, bestp_arr[i]->seq->n1, pst.zdb_size, pst.zsflag, m_msg.pstat_void),
 		    bestp_arr[i]->rst.score[pst.score_ix]);
 	    }
 	  }
