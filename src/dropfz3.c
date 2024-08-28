@@ -3474,11 +3474,11 @@ calc_cons_u( /* inputs */
 	}
 
 	if (s_annotp_arr_p) {
-	  /* coordiates are much more complex for next_annot_match,
+	  /* coordinates are much more complex for next_annot_match,
 	     and comment_var, because they may need to be reversed */
 
 	  if (i1 + i1_offset == s_annotp_arr_p[i1_annot]->pos) {
-	    i1_annot = next_annot_match(&itmp, ppst->pam2[0][ap0[i0]],
+	    i1_annot = next_annot_match(&itmp, NULL,
 #ifndef TFAST
 					i1_offset+seq_pos(i1,aln->llrev,0),	/* annotated target (prot) coordinate */
 					i0_offset+seq_pos(i0,aln->qlrev,0),

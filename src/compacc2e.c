@@ -4027,7 +4027,7 @@ process_annot_match(int *itmp, int *pam2aa0v,
     left_domain_p->pos = ip;
     left_domain_p->a_pos = ia;
 
-    if (annot_arr_p->label == 'V') { /* label == 'V' */
+    if (pam2aa0v && annot_arr_p->label == 'V') { /* label == 'V' */
       v_tmp = pam2aa0v[annot_arr_p->value];
       if (v_tmp > *itmp) {
 	*v_delta += (v_tmp- *itmp);

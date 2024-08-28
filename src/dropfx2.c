@@ -3148,8 +3148,7 @@ calc_cons_u( /* inputs */
 	}
 	if (s_annotp_arr_p) {
 	  if (i1+i1_offset == s_annotp_arr_p[i1_annot]->pos || i1+i1_offset == i1_left_end) {
-
-	    i1_annot = next_annot_match(&itmp, ppst->pam2[0][ap0[i0]], 
+	    i1_annot = next_annot_match(&itmp, ppst->pam2[0][1], 
 #ifndef TFAST
 					i1_offset+seq_pos(i1,aln->llrev,0),	/* annotated target (prot) coordinate */
 					i0_offset+seq_pos(i0,aln->qlrev,0),
@@ -3231,11 +3230,11 @@ calc_cons_u( /* inputs */
 	/* this simple strategy works because the coordinate system
 	   for the alignment is reversed appropriately */
 	if (calc_func_mode != CALC_ID && calc_func_mode != CALC_ID_DOM) {
-	  *sp1a_p = ann_arr[ap1a[i1]];
 	  *sp0a_p = ' ';
+	  *sp1a_p = ann_arr[ap1a[i1]];
 	}
 	if (s_annotp_arr_p) {
-	  /* coordiates are much more complex for next_annot_match,
+	  /* coordinates are much more complex for next_annot_match,
 	     and comment_var, because they may need to be reversed */
 
 	  if (i1+i1_offset == s_annotp_arr_p[i1_annot]->pos || i1+i1_offset == i1_left_end) {
